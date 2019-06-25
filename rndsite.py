@@ -1,7 +1,9 @@
 #!/usr/bin/env python3.7
 import os
 
-from flask import Flask, render_template
+from flask import Flask, render_template, flash, redirect, url_for, request, jsonify
+from flask_login import LoginManager, login_required, login_user, logout_user, current_user
+from flask_session import Session
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.contrib.fixers import ProxyFix
 
@@ -21,6 +23,19 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 app.config['SESSION_TYPE'] = 'redis'
 sess = Session(app)
+login_manager = LoginManager(app)
+login_manager.login_view = "users.login"
+
+
+@login_manager.user_loader
+def load_user(uid):
+    return Settings.query.filter_by(key=uid).first()
+
+
+@login_manager.unauthorized_handler
+def unauthorized_handler():
+    flash('Для этого действия требуется авторизация', 'error')
+    return redirect(url_for('index'))
 
 
 class Settings(db.Model):
@@ -30,6 +45,22 @@ class Settings(db.Model):
     def __init__(self, key, value):
         self.key = key
         self.value = value
+
+    @staticmethod
+    def is_authenticated():
+        return True
+
+    @staticmethod
+    def is_active():
+        return True
+
+    @staticmethod
+    def is_anonymous():
+        return False
+
+    @staticmethod
+    def get_id():
+        return 'username'
 
     def __repr__(self):
         return "'%s': '%s'" % (self.key, self.value)
