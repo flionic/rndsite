@@ -1,0 +1,10 @@
+[Unit]
+Description=Flask app for rndsite
+Documentation=https://rndsite.ml
+[Service]
+WorkingDirectory=/var/www/rndsite
+ExecStart=/usr/bin/python3.7 /var/www/rndsite/wsgi.py
+Restart=always
+
+[Install]
+WantedBy=multi-user.target
