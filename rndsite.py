@@ -21,6 +21,18 @@ app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 
+class Settings(db.Model):
+    key = db.Column(db.String(24), primary_key=True, unique=True, nullable=False)
+    value = db.Column(db.Text)
+
+    def __init__(self, key, value):
+        self.key = key
+        self.value = value
+
+    def __repr__(self):
+        return "'%s': '%s'" % (self.key, self.value)
+
+
 @app.route('/')
 def index():
     return render_template('index.html')
