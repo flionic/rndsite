@@ -2,7 +2,7 @@
 
 import os
 from werkzeug.contrib.fixers import ProxyFix
-from flask import Flask
+from flask import Flask, render_template
 
 app = Flask(__name__, instance_relative_config=True)
 app.jinja_env.trim_blocks = True
@@ -15,7 +15,7 @@ app.config['SECRET_KEY'] = os.getenv('APP_SECRET_KEY', '7-DEV_MODE_KEY-7')
 
 @app.route('/')
 def index():
-    return 'ok'
+    return render_template('index.html')
 
 
 if __name__ == '__main__':
