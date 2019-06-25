@@ -145,6 +145,11 @@ def upload_file():
         return redirect(url_for('uploaded_file', filename=filename))
 
 
+@app.route('/uploads/<filename>')
+def uploaded_file(filename):
+    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
+
+
 def init_app():
     db.create_all()
     # password = Settings.query
