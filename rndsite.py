@@ -1,4 +1,5 @@
 #!/usr/bin/env python3.7
+from datetime import datetime
 import os
 
 import bcrypt
@@ -65,6 +66,18 @@ class Settings(db.Model):
 
     def __repr__(self):
         return "'%s': '%s'" % (self.key, self.value)
+
+
+class Tasks(db.Model):
+    id = db.Column(db.Integer, unique=True, nullable=False, primary_key=True, index=True)
+    name = db.Column(db.String(255))
+    start_date = db.Column(db.DateTime)
+    end_date = db.Column(db.DateTime, default=None)
+    out_link = db.Column(db.String(512))
+
+    def __init__(self, name):
+        self.name = name
+        self.start_date = datetime.now()
 
 
 @app.route('/')
