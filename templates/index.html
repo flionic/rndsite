@@ -41,10 +41,11 @@
 
     <main role="main" class="inner cover">
         {% if current_user and current_user.is_authenticated %}
-            <form method=post class="upload-file" action="/upload-file" enctype=multipart/form-data>
+            <form method=post class="upload-file" action="/upload-file" enctype=multipart/form-data style="display: none">
                 <input type=file name=file>
                 <input type=submit value=Upload>
             </form>
+            <button type="button" class="btn btn-lg btn-light btn-upload">Загрузить архив</button>
         {% else %}
             <h1 class="cover-heading">Необходима авторизация</h1>
             <p class="lead"><a href="#" class="btn btn-lg btn-secondary btn-login" data-toggle="modal" data-target="#loginModal">Войти</a></p>
@@ -57,49 +58,61 @@
         </div>
     </footer>
 </div>
-{% if current_user and current_user.is_anonymous %}
-<!-- Modal -->
-<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalTitle" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered" role="document">
-        <div class="modal-content bg-dark">
-            <div class="modal-header">
-                <h5 class="modal-title" id="loginModalTitle">Авторизация</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form id="loginForm" method="post">
-                <div class="modal-body">
-                    <div class="form-group">
-                        <label for="mainPassword">Пароль</label>
-                        <input type="password" class="form-control" id="mainPassword" placeholder="Пароль">
+{% if current_user.is_anonymous %}
+    <!-- Modal -->
+    <div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="loginModalTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content bg-dark">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalTitle">Авторизация</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <form id="loginForm" method="post">
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="mainPassword">Пароль</label>
+                            <input type="password" class="form-control" id="mainPassword" placeholder="Пароль">
+                        </div>
                     </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">Войти</button>
-                </div>
-            </form>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Войти</button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-</div>
 {% endif %}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
         crossorigin="anonymous"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
         crossorigin="anonymous"></script>
-{% if current_user and current_user.is_anonymous %}
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('#loginForm').submit(function (e) {
-            e.preventDefault();
-            $.post('/login', {"password": $('#mainPassword').val()})
-                .always(function () {
-                    window.location.replace("/");
-                });
+{% if current_user.is_authenticated %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+           $('.btn-upload').click(function () {
+               console.log('clicked');
+               $('.upload-file :file').click();
+               $('.upload-file :file').on('change', function () {
+                   $('.upload-file :submit').click()
+               });
+           });
         });
-    });
-</script>
+    </script>
+{% else %}
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#loginForm').submit(function (e) {
+                e.preventDefault();
+                $.post('/login', {"password": $('#mainPassword').val()})
+                    .always(function () {
+                        window.location.replace("/");
+                    });
+            });
+        });
+    </script>
 {% endif %}
 </body>
 </html>
