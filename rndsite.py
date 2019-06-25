@@ -4,11 +4,14 @@ import os
 from werkzeug.contrib.fixers import ProxyFix
 from flask import Flask, render_template
 
+basedir = os.path.abspath(os.path.dirname(__file__))
 app = Flask(__name__, instance_relative_config=True)
 app.jinja_env.trim_blocks = True
 app.jinja_env.lstrip_blocks = True
+app.url_map.strict_slashes = False
 app.wsgi_app = ProxyFix(app.wsgi_app)
 app.config['APP_NAME'] = 'rndsite'
+app.config['APP_TITLE'] = 'Site Randomize'
 app.config['VERSION'] = '0.0.1'
 app.config['SECRET_KEY'] = os.getenv('APP_SECRET_KEY', '7-DEV_MODE_KEY-7')
 
