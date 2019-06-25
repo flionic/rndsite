@@ -1,6 +1,7 @@
 #!/usr/bin/env python3.7
 import os
 
+import bcrypt
 from flask import Flask, render_template, flash, redirect, url_for, request, jsonify
 from flask_login import LoginManager, login_required, login_user, logout_user, current_user
 from flask_session import Session
@@ -70,6 +71,46 @@ class Settings(db.Model):
 def index():
     return render_template('index.html')
 
+
+@app.route('/login', methods=['POST'])
+def login():
+    if current_user.is_authenticated:
+        flash('Вы уже авторизированы', 'warning')
+        return redirect(url_for('index'))
+    password = Settings.query.filter_by(key='password').first()
+    # elif bcrypt.checkpw(str.encode(request.form['password']), str.encode(password.value)) is False:
+    if bcrypt.checkpw(str.encode(request.form['password']), password.value) is False:
+        flash('Неверный пароль', 'error')
+    else:
+        login_user(Settings.query.filter_by(key='username').first())
+        flash(f'Авторизирован')
+    return jsonify({'response': 1})
+
+
+@app.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('index'))
+
+
+@app.route('/change-pass', methods=['POST'])
+@login_required
+def change_password():
+    new_pass = str.encode(request.form.get('password'))
+    hashed_password = bcrypt.hashpw(new_pass, bcrypt.gensalt())
+    password = Settings.query.filter_by(key='password').first()
+    password.value = hashed_password
+    db.session.commit()
+    flash('Пароль успешно изменен')
+    return jsonify({"response": 1})
+
+
+def init_app():
+    db.create_all()
+    # password = Settings.query
+
+
+init_app()
 
 if __name__ == '__main__':
     print('Start Flask')
