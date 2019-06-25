@@ -1,8 +1,9 @@
 #!/usr/bin/env python3.7
-
 import os
-from werkzeug.contrib.fixers import ProxyFix
+
 from flask import Flask, render_template
+from flask_sqlalchemy import SQLAlchemy
+from werkzeug.contrib.fixers import ProxyFix
 
 basedir = os.path.abspath(os.path.dirname(__file__))
 app = Flask(__name__, instance_relative_config=True)
@@ -14,6 +15,10 @@ app.config['APP_NAME'] = 'rndsite'
 app.config['APP_TITLE'] = 'Site Randomize'
 app.config['VERSION'] = '0.0.1'
 app.config['SECRET_KEY'] = os.getenv('APP_SECRET_KEY', '7-DEV_MODE_KEY-7')
+db_link = 'sqlite:///' + os.path.join(basedir, 'main.db')
+app.config['SQLALCHEMY_DATABASE_URI'] = db_link
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
+db = SQLAlchemy(app)
 
 
 @app.route('/')
