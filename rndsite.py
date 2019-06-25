@@ -19,6 +19,8 @@ db_link = 'sqlite:///' + os.path.join(basedir, 'main.db')
 app.config['SQLALCHEMY_DATABASE_URI'] = db_link
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
+app.config['SESSION_TYPE'] = 'redis'
+sess = Session(app)
 
 
 class Settings(db.Model):
