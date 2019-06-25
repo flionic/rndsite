@@ -1,16 +1,19 @@
 #!/usr/bin/env python3.7
-from datetime import datetime
 import os
+from datetime import datetime
 
 import bcrypt
-from flask import Flask, render_template, flash, redirect, url_for, request, jsonify
+from flask import Flask, render_template, flash, redirect, url_for, request, jsonify, send_from_directory
 from flask_login import LoginManager, login_required, login_user, logout_user, current_user
 from flask_session import Session
 from flask_sqlalchemy import SQLAlchemy
 from werkzeug.contrib.fixers import ProxyFix
+from werkzeug.utils import secure_filename
 
-basedir = os.path.abspath(os.path.dirname(__file__))
 app = Flask(__name__, instance_relative_config=True)
+basedir = os.path.abspath(os.path.dirname(__file__))
+UPLOAD_FOLDER = os.path.join(basedir, 'projects')
+ALLOWED_EXTENSIONS = set(['zip'])
 app.jinja_env.trim_blocks = True
 app.jinja_env.lstrip_blocks = True
 app.url_map.strict_slashes = False
@@ -19,6 +22,7 @@ app.config['APP_NAME'] = 'rndsite'
 app.config['APP_TITLE'] = 'Site Randomize'
 app.config['VERSION'] = '0.0.1'
 app.config['SECRET_KEY'] = os.getenv('APP_SECRET_KEY', '7-DEV_MODE_KEY-7')
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 db_link = 'sqlite:///' + os.path.join(basedir, 'main.db')
 app.config['SQLALCHEMY_DATABASE_URI'] = db_link
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
@@ -38,6 +42,11 @@ def load_user(uid):
 def unauthorized_handler():
     flash('Для этого действия требуется авторизация', 'error')
     return redirect(url_for('index'))
+
+
+def allowed_file(filename):
+    return '.' in filename and \
+           filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
 
 class Settings(db.Model):
@@ -74,6 +83,7 @@ class Tasks(db.Model):
     start_date = db.Column(db.DateTime)
     end_date = db.Column(db.DateTime, default=None)
     out_link = db.Column(db.String(512))
+    log_file = db.Column(db.String(128))
 
     def __init__(self, name):
         self.name = name
@@ -116,6 +126,23 @@ def change_password():
     db.session.commit()
     flash('Пароль успешно изменен')
     return jsonify({"response": 1})
+
+
+@app.route('/upload-file', methods=['POST'])
+def upload_file():
+    if 'file' not in request.files:
+        flash('Файл не получен')
+        return redirect(request.url)
+    file = request.files['file']
+    # if user does not select file, browser also
+    # submit an empty part without filename
+    if file.filename == '':
+        flash('Файл не выбран')
+        return redirect(request.url)
+    if file and allowed_file(file.filename):
+        filename = secure_filename(file.filename)
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        return redirect(url_for('uploaded_file', filename=filename))
 
 
 def init_app():
