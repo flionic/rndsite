@@ -10,6 +10,8 @@ from flask_sqlalchemy import SQLAlchemy
 from werkzeug.contrib.fixers import ProxyFix
 from werkzeug.utils import secure_filename
 
+import rnd
+
 app = Flask(__name__, instance_relative_config=True)
 basedir = os.path.abspath(os.path.dirname(__file__))
 UPLOAD_FOLDER = os.path.join(basedir, 'projects')
@@ -19,7 +21,7 @@ app.jinja_env.lstrip_blocks = True
 app.url_map.strict_slashes = False
 app.wsgi_app = ProxyFix(app.wsgi_app)
 app.config['APP_NAME'] = 'rndsite'
-app.config['APP_TITLE'] = 'Site Randomize'
+app.config['APP_TITLE'] = 'Randomize WebSite'
 app.config['VERSION'] = '0.0.1'
 app.config['SECRET_KEY'] = os.getenv('APP_SECRET_KEY', '7-DEV_MODE_KEY-7')
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
@@ -144,12 +146,21 @@ def upload_file():
     if file and allowed_file(file.filename):
         filename = secure_filename(file.filename)
         file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-        return redirect(url_for('uploaded_file', filename=filename))
+        task = Tasks(filename.rsplit('.', 1)[0])
+        db.session.add(task)
+        db.session.commit()
+        rsite = rnd.RandomizeSiteAttrs(os.path.join(app.config['UPLOAD_FOLDER'], filename), out_path=app.config['UPLOAD_FOLDER'])
+        # return redirect(url_for('uploaded_file', filename=filename))
+        task.out_link = url_for('uploaded_file', filename=rsite.out_name)
+        task.end_date = rsite.end_time
+        task.progress = 100
+        db.session.commit()
+        return redirect(url_for('uploaded_file', filename=rsite.out_name))
 
 
 @app.route('/uploads/<filename>')
 def uploaded_file(filename):
-    return send_from_directory(app.config['UPLOAD_FOLDER'], filename)
+    return send_from_directory(os.path.join(app.config['UPLOAD_FOLDER'], 'rsa'), filename)
 
 
 def init_app():
