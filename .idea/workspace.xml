@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="386d4235-eebb-4971-a2e3-3fa1ddd461b1" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/static/css/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rnd.py" beforeDir="false" afterPath="$PROJECT_DIR$/rnd.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rndsite.py" beforeDir="false" afterPath="$PROJECT_DIR$/rndsite.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/index.html" afterDir="false" />
     </list>
@@ -20,7 +20,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="DarkyenusTimeTracker">
-    <option name="totalTimeSeconds" value="18945" />
+    <option name="totalTimeSeconds" value="21401" />
     <option name="gitIntegration" value="true" />
     <option name="naggedAbout" value="1" />
   </component>
@@ -56,11 +56,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/rndsite.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="407">
-              <caret line="156" column="27" selection-start-line="156" selection-start-column="27" selection-end-line="156" selection-end-column="27" />
+            <state relative-caret-position="141">
+              <caret line="150" column="8" lean-forward="true" selection-start-line="150" selection-start-column="8" selection-end-line="150" selection-end-column="8" />
               <folding>
                 <element signature="e#25#34#0" expanded="true" />
               </folding>
@@ -71,8 +71,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/rnd.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="876">
-              <caret line="59" column="28" lean-forward="true" selection-start-line="59" selection-start-column="28" selection-end-line="59" selection-end-column="28" />
+            <state relative-caret-position="127">
+              <caret line="97" column="85" selection-start-line="97" selection-start-column="85" selection-end-line="97" selection-end-column="85" />
               <folding>
                 <element signature="e#0#14#0" expanded="true" />
               </folding>
@@ -80,23 +80,14 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/templates/index.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="323">
-              <caret line="17" column="27" lean-forward="true" selection-start-line="17" selection-start-column="27" selection-end-line="17" selection-end-column="27" />
+            <state relative-caret-position="498">
+              <caret line="114" column="44" selection-start-line="114" selection-start-column="44" selection-end-line="114" selection-end-column="44" />
               <folding>
                 <element signature="n#style#0;n#form#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
               </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/static/css/style.css">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="247">
-              <caret line="13" column="1" selection-start-line="13" selection-start-column="1" selection-end-line="13" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -111,10 +102,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="das://991be5a0-af79-4ab1-9ca2-ae3aa3d91e5c/schema/main/table/settings">
-          <provider selected="true" editor-type-id="com.intellij.database.editor.DatabaseTableFileEditorProvider">
-            <state>
-              <filtering enabled="true" />
+        <entry file="file://$PROJECT_DIR$/static/css/style.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="247">
+              <caret line="13" column="1" selection-start-line="13" selection-start-column="1" selection-end-line="13" selection-end-column="1" />
             </state>
           </provider>
         </entry>
@@ -144,10 +135,10 @@
         <option value="$PROJECT_DIR$/rndsite.conf" />
         <option value="$PROJECT_DIR$/wsgi.py" />
         <option value="$PROJECT_DIR$/.gitignore" />
-        <option value="$PROJECT_DIR$/templates/index.html" />
         <option value="$PROJECT_DIR$/static/css/cover.css" />
-        <option value="$PROJECT_DIR$/rnd.py" />
         <option value="$PROJECT_DIR$/rndsite.py" />
+        <option value="$PROJECT_DIR$/rnd.py" />
+        <option value="$PROJECT_DIR$/templates/index.html" />
       </list>
     </option>
   </component>
@@ -210,7 +201,7 @@
     <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
     <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
     <property name="aspect.path.notification.shown" value="true" />
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1561512300519" />
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1561515031636" />
     <property name="com.intellij.ide.scratch.LRUPopupBuilder$1/Change SQL Dialect" value="SQLite" />
     <property name="database.console.LAST_STATE" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$/../oleksienko/theme" />
@@ -250,7 +241,7 @@
       <option name="presentableId" value="Default" />
       <updated>1561466464125</updated>
       <workItem from="1561466477537" duration="14620000" />
-      <workItem from="1561501838615" duration="9397000" />
+      <workItem from="1561501838615" duration="12179000" />
     </task>
     <task id="LOCAL-00001" summary="Second commit">
       <created>1561467317762</created>
@@ -371,14 +362,35 @@
       <option name="project" value="LOCAL" />
       <updated>1561506873984</updated>
     </task>
-    <option name="localTasksCounter" value="18" />
+    <task id="LOCAL-00018" summary="Move style to project">
+      <created>1561512296893</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1561512296893</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Add table with projects">
+      <created>1561512362516</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1561512362516</updated>
+    </task>
+    <task id="LOCAL-00020" summary="First connect main library rnd.py">
+      <created>1561512406965</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1561512406965</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="24017000" />
+    <option name="totallyTimeSpent" value="26799000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="138" y="4" width="1985" height="1045" extended-state="0" />
+    <frame x="138" y="4" width="1985" height="1045" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info id="Designer" order="0" />
@@ -452,7 +464,10 @@
     <MESSAGE value="File downloader" />
     <MESSAGE value="Styled file uploader" />
     <MESSAGE value="Upd project" />
-    <option name="LAST_COMMIT_MESSAGE" value="Upd project" />
+    <MESSAGE value="Move style to project" />
+    <MESSAGE value="Add table with projects" />
+    <MESSAGE value="First connect main library rnd.py" />
+    <option name="LAST_COMMIT_MESSAGE" value="First connect main library rnd.py" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/.idea/webServers.xml">
@@ -485,13 +500,6 @@
           <folding>
             <element signature="e#21#43#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/main.db">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret selection-end-column="6" />
         </state>
       </provider>
     </entry>
@@ -551,30 +559,17 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/templates/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="17" column="27" lean-forward="true" selection-start-line="17" selection-start-column="27" selection-end-line="17" selection-end-column="27" />
-          <folding>
-            <element signature="n#style#0;n#form#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://C:/Program Files/Python37/Lib/site-packages/flask/helpers.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="295">
-          <caret line="676" column="4" selection-start-line="676" selection-start-column="4" selection-end-line="676" selection-end-column="4" />
+        <state relative-caret-position="-2117">
+          <caret line="215" column="4" selection-start-line="215" selection-start-column="4" selection-end-line="215" selection-end-column="4" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/rnd.py">
+    <entry file="file://$PROJECT_DIR$/main.db">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="876">
-          <caret line="59" column="28" lean-forward="true" selection-start-line="59" selection-start-column="28" selection-end-line="59" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#14#0" expanded="true" />
-          </folding>
+        <state>
+          <caret selection-end-column="6" />
         </state>
       </provider>
     </entry>
@@ -587,10 +582,30 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/rndsite.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="407">
-          <caret line="156" column="27" selection-start-line="156" selection-start-column="27" selection-end-line="156" selection-end-column="27" />
+        <state relative-caret-position="141">
+          <caret line="150" column="8" lean-forward="true" selection-start-line="150" selection-start-column="8" selection-end-line="150" selection-end-column="8" />
           <folding>
             <element signature="e#25#34#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/rnd.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="127">
+          <caret line="97" column="85" selection-start-line="97" selection-start-column="85" selection-end-line="97" selection-end-column="85" />
+          <folding>
+            <element signature="e#0#14#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/templates/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="498">
+          <caret line="114" column="44" selection-start-line="114" selection-start-column="44" selection-end-line="114" selection-end-column="44" />
+          <folding>
+            <element signature="n#style#0;n#form#0;n#main#0;n#div#0;n#body#0;n#html#0;n#!!top" expanded="true" />
           </folding>
         </state>
       </provider>

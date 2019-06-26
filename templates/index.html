@@ -29,7 +29,8 @@
                 <input type=file name=file>
                 <input type=submit value=Upload>
             </form>
-            <button type="button" class="btn btn-lg btn-light btn-upload">Загрузить архив</button>
+            <h3 class="cover-heading msg-wait">Ждите...</h3>
+            <p class="lead"><button type="button" class="btn btn-lg btn-light btn-upload">Добавить сайт (zip)</button></p>
             {% if tasks %}
                 <table class="table table-dark">
                     <thead>
@@ -48,11 +49,11 @@
                         <tr>
                             <th scope="row">{{ t.id }}</th>
                             <td>{{ t.name }}</td>
-                            <td>{{ t.progress }}</td>
-                            <td>{{ t.start_date }}</td>
-                            <td>{{ t.end_date }}</td>
-                            <td>{{ t.out_file }}</td>
-                            <td>{{ t.log_file }}</td>
+                            <td>{{ t.progress }}%</td>
+                            <td>{{ t.start_date.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                            <td>{{ t.end_date.strftime('%Y-%m-%d %H:%M:%S') }}</td>
+                            <td><a class="btn-link" href="{{ t.out_link }}" role="button">{{ t.out_link.rsplit('/')[-1] if t.out_link else '' }}</a></td>
+                            <td><a class="btn-link" href="{{ t.log_file }}" role="button">{{ t.log_file.rsplit('/')[-1] if t.log_file else '' }}</a></td>
                         </tr>
                     {% endfor %}
                     </tbody>
@@ -104,11 +105,14 @@
 {% if current_user.is_authenticated %}
     <script type="text/javascript">
         $(document).ready(function () {
+            $('.msg-wait').hide();
             $('.btn-upload').click(function () {
                 console.log('clicked');
                 $('.upload-file :file').click();
                 $('.upload-file :file').on('change', function () {
-                    $('.upload-file :submit').click()
+                    $('.upload-file :submit').click();
+                    $('.btn-upload').fadeOut();
+                    $('.msg-wait').fadeIn();
                 });
             });
         });
