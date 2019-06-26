@@ -23,7 +23,7 @@ logging.basicConfig(level=logging.DEBUG,
                     format='%(asctime)-18s %(name)s | %(levelname)-6s | %(message)s',
                     # format='%(asctime)s %(name)-12s: %(levelname)-8s | %(message)s',
                     datefmt='%b %d %H:%M:%S',
-                    filename=os.path.realpath(f'{arrow.now().strftime("rsa_%Y%m%d.log")}'),
+                    filename=os.path.join('logs', f'{arrow.now().strftime("rsa_%Y%m%d.log")}'),
                     filemode='a+')
 console = logging.StreamHandler()
 console.setLevel(logging.INFO)
@@ -63,6 +63,7 @@ class RandomizeSiteAttrs:
         self.out_zip = None
         self.out_name = None
         self.end_time = None
+        self.logfile = os.path.join('logs', f'{arrow.now().strftime("rsa_%Y%m%d.log")}')
 
         self.logger.info(f'Start RandomizeSiteAttrs for {self.project_name}')
 
@@ -93,9 +94,8 @@ class RandomizeSiteAttrs:
     #     return logging.getLogger(f'RSA')
 
     def job_done(self):
-        self.end_time = arrow.utcnow()
+        self.end_time = arrow.now().datetime
         self.logger.info(f'Done for {self.start_time.humanize(only_distance=True)}.')
-        return {'zip_name': self.out_name}
 
     def unzip_site(self):
         self.logger.info(f'Unzip source..')

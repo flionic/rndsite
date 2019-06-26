@@ -86,7 +86,7 @@ class Tasks(db.Model):
     end_date = db.Column(db.DateTime, default=None)
     out_link = db.Column(db.String(512))
     log_file = db.Column(db.String(128))
-    progress = db.Column(db.Integer)
+    progress = db.Column(db.Integer, default=0)
 
     def __init__(self, name):
         self.name = name
@@ -154,13 +154,20 @@ def upload_file():
         task.out_link = url_for('uploaded_file', filename=rsite.out_name)
         task.end_date = rsite.end_time
         task.progress = 100
+        task.log_file = rsite.logfile
         db.session.commit()
-        return redirect(url_for('uploaded_file', filename=rsite.out_name))
+        return redirect(url_for('index'))
+        # return redirect(url_for('uploaded_file', filename=rsite.out_name))
 
 
-@app.route('/uploads/<filename>')
+@app.route('/rsa/<filename>')
 def uploaded_file(filename):
     return send_from_directory(os.path.join(app.config['UPLOAD_FOLDER'], 'rsa'), filename)
+
+
+@app.route('/logs/<filename>')
+def rsa_logs(filename):
+    return send_from_directory(os.path.join(basedir, 'logs'), filename)
 
 
 def init_app():
