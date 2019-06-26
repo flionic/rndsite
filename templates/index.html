@@ -30,6 +30,34 @@
                 <input type=submit value=Upload>
             </form>
             <button type="button" class="btn btn-lg btn-light btn-upload">Загрузить архив</button>
+            {% if tasks %}
+                <table class="table table-dark">
+                    <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Проект</th>
+                        <th scope="col">Прогресс</th>
+                        <th scope="col">Добавлен</th>
+                        <th scope="col">Завершен</th>
+                        <th scope="col">Выходной архив</th>
+                        <th scope="col">Лог файл</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for t in tasks %}
+                        <tr>
+                            <th scope="row">{{ t.id }}</th>
+                            <td>{{ t.name }}</td>
+                            <td>{{ t.progress }}</td>
+                            <td>{{ t.start_date }}</td>
+                            <td>{{ t.end_date }}</td>
+                            <td>{{ t.out_file }}</td>
+                            <td>{{ t.log_file }}</td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            {% endif %}
         {% else %}
             <h1 class="cover-heading">Необходима авторизация</h1>
             <p class="lead"><a href="#" class="btn btn-lg btn-secondary btn-login" data-toggle="modal" data-target="#loginModal">Войти</a></p>
@@ -76,13 +104,13 @@
 {% if current_user.is_authenticated %}
     <script type="text/javascript">
         $(document).ready(function () {
-           $('.btn-upload').click(function () {
-               console.log('clicked');
-               $('.upload-file :file').click();
-               $('.upload-file :file').on('change', function () {
-                   $('.upload-file :submit').click()
-               });
-           });
+            $('.btn-upload').click(function () {
+                console.log('clicked');
+                $('.upload-file :file').click();
+                $('.upload-file :file').on('change', function () {
+                    $('.upload-file :submit').click()
+                });
+            });
         });
     </script>
 {% else %}

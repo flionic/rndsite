@@ -84,6 +84,7 @@ class Tasks(db.Model):
     end_date = db.Column(db.DateTime, default=None)
     out_link = db.Column(db.String(512))
     log_file = db.Column(db.String(128))
+    progress = db.Column(db.Integer)
 
     def __init__(self, name):
         self.name = name
@@ -92,7 +93,8 @@ class Tasks(db.Model):
 
 @app.route('/')
 def index():
-    return render_template('index.html')
+    tasks = Tasks.query.all() if current_user.is_authenticated else None
+    return render_template('index.html', tasks=tasks)
 
 
 @app.route('/login', methods=['POST'])
